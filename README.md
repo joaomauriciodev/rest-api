@@ -8,5 +8,5 @@ Rest Api with Golang
 - Docker
 
 ## Endpoints
-- ´´´GET api/products´´´ : Return all products
+- ```GET api/products``` : Return all products
 
