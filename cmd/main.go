@@ -1,14 +1,16 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/joaomauriciodev/rest-api/controller"
+)
 
 func main() {
 	s := gin.Default()
-	s.GET("/teste", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "teste gin",
-		})
-	})
+
+	productController := controller.NewProductController()
+
+	s.GET("/api/products", productController.GetProducts)
 
 	s.Run(":8000")
 }
