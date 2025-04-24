@@ -1,10 +1,10 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joaomauriciodev/rest-api/model"
 	"github.com/joaomauriciodev/rest-api/usecase"
 )
 
@@ -17,12 +17,11 @@ func NewProductController(usecase usecase.ProductUsecase) productController {
 }
 
 func (p *productController) GetProducts(ctx *gin.Context) {
-	products := []model.Product{
-		{
-			ID:          1,
-			Description: "Produto X",
-			Price:       10.00,
-		},
+	products, err := p.productUsecase.GetProducts()
+	if err != nil {
+		log.Fatalln(err)
+		ctx.JSON(http.StatusInternalServerError, err)
+		return
 	}
 
 	ctx.JSON(http.StatusOK, products)
