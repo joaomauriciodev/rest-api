@@ -5,13 +5,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joaomauriciodev/rest-api/model"
+	"github.com/joaomauriciodev/rest-api/usecase"
 )
 
 type productController struct {
+	productUsecase usecase.ProductUsecase
 }
 
-func NewProductController() productController {
-	return productController{}
+func NewProductController(usecase usecase.ProductUsecase) productController {
+	return productController{productUsecase: usecase}
 }
 
 func (p *productController) GetProducts(ctx *gin.Context) {
